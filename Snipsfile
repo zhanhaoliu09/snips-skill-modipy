@@ -1,0 +1,45 @@
+ssistant_file : /home/pi/assistant.zip
+logging: True
+microphone:
+    identifier: respeaker
+    params:
+        vendor_id: "1415"
+        product_id: "2000"
+skills:
+    - package_name: snipsmodipy
+      class_name: SnipsModipy
+      url: git+https://github.com/zhanhaodesavoie/snips-skill-modipy.git 
+      params:
+          url : http://localhost:6680/mopidy/rpc
+      description: We control modipy based on your voice.
+      intents:
+        - intent: PlayMusicCreativeWork
+          action: |
+            {%
+            skill.playMusic()
+            %}
+        - intent: DeactivatePlaybackMode
+          action: |
+            {%
+            skill.stopMusic()
+            %}
+        - intent: SuspendMusicCreativeWork
+          action: |
+            {%
+            skill.pauseMusic()
+            %}
+        - intent: ResumeMusicCreativeWork
+          action: |
+            {%
+            skill.playMusic()
+            %}
+        - intent: PreviousTrack
+          action: |
+            {%
+            skill.previous()
+            %}
+        - intent: NextTrack
+          action: |
+            {%
+            skill.next()
+            %}
