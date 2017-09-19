@@ -1,86 +1,34 @@
-package_name: snipsmidipy
+package_name: snipsmodipy
 class_name: SnipsModipy
-description: We got fake news. Now it is time for fake weather forecasts.
+description: We control modipy based on your voice.
 intents:
-  - intent: SearchWeatherForecastTemperature
+  - intent: PlayMusicCreativeWork
     action: |
       {%
-      locality = None
-      try:
-        locality = intent.weatherForecastLocality \
-          or intent.weatherForecastCountry \
-          or intent.weatherForecastRegion \
-          or intent.weatherForecastGeographicalPOI
-      except Exception:
-        pass
-
-      datetime = None
-      granularity = None
-      if isinstance(intent.weatherForecastStartDatetime, InstantTime):
-        datetime = intent.weatherForecastStartDatetime.datetime
-        granularity = intent.weatherForecastStartDatetime.granularity
-      elif isinstance(intent.weatherForecastStartDatetime, TimeInterval):
-        datetime = intent.weatherForecastStartDatetime.start
-
-      skill.speak_temperature(locality, datetime, granularity)
+      skill.playMusic()
       %}
-  - intent: SearchWeatherForecast
+  - intent: DeactivatePlaybackMode
     action: |
       {%
-      locality = None
-      try:
-        locality = intent.weatherForecastLocality \
-          or intent.weatherForecastCountry \
-          or intent.weatherForecastRegion \
-          or intent.weatherForecastGeographicalPOI
-      except Exception:
-        pass
-
-      datetime = None
-      granularity = None
-      if isinstance(intent.weatherForecastStartDatetime, InstantTime):
-        datetime = intent.weatherForecastStartDatetime.datetime
-        granularity = intent.weatherForecastStartDatetime.granularity
-      elif isinstance(intent.weatherForecastStartDatetime, TimeInterval):
-        datetime = intent.weatherForecastStartDatetime.start
-
-      skill.speak_forecast(locality, datetime, granularity)
+      skill.stopMusic()
       %}
-  - intent: SearchWeatherForecastCondition
+  - intent: SuspendMusicCreativeWork
     action: |
       {%
-      from snipsfakeweather.snipsfakeweather import WeatherCondition
-
-      locality = None
-      try:
-        locality = intent.weatherForecastLocality \
-          or intent.weatherForecastCountry \
-          or intent.weatherForecastRegion \
-          or intent.weatherForecastGeographicalPOI
-      except Exception:
-        pass
-
-      datetime = None
-      granularity = None
-      if isinstance(intent.weatherForecastStartDatetime, InstantTime):
-        datetime = intent.weatherForecastStartDatetime.datetime
-        granularity = intent.weatherForecastStartDatetime.granularity
-      elif isinstance(intent.weatherForecastStartDatetime, TimeInterval):
-        datetime = intent.weatherForecastStartDatetime.start
-
-      name = None
-      condition = None
-      try:
-        name = intent.weatherForecastConditionName
-      except Exception:
-        pass
-
-      if "rain" in name:
-        condition = WeatherCondition.rain
-      elif "wind" in name:
-        condition = WeatherCondition.wind
-      elif "sun" in name:
-        condition = WeatherCondition.sun
-
-      skill.speak_condition(condition, locality, datetime, granularity)
+      skill.pauseMusic()
+      %}
+  - intent: ResumeMusicCreativeWork
+    action: |
+      {%
+      skill.playMusic()
+      %}
+  - intent: PreviousTrack
+    action: |
+      {%
+      skill.previous()
+      %}
+  - intent: NextTrack
+    action: |
+      {%
+      skill.next()
       %}
