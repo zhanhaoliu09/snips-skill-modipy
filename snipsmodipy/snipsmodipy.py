@@ -19,6 +19,10 @@ commandList = {'play' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pl
 }
 
 def request(url, data):
+    """ send data to url.
+    :param url: url of mopidy
+    :param data: json-formatted command
+    """
     req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
     f = urllib2.urlopen(req)
     print(type(f))
@@ -55,27 +59,42 @@ def search_playlist(url, params):
 
 class SnipsModipy(object):
     def __init__(self, url):
-        print('*********************')
+        print('Init snips-skill-modipy')
         self.url = url
         
     def playMusic(self):
-        print('play')
+        """ Play music .
+        """
+        print('Play')
         play(self.url)
         
     def pauseMusic(self):
+        """ Pause music with mopidy.
+        """
+        print('Pause')
         pause(self.url)
         
     def stopMusic(self):
-        print('stop')
+        """ Stop music playing.
+        """
+        print('Stop')
         stop(self.url)
     
     def next(self):
+        """ Change to next music.
+        """
+        print('Next')
         skip_track(self.url)
         
     def previous(self):
+        """ Change to previous music.
+        """
+        print('Previous')
         previous_track(self.url)
 
     def find(self, artist = None, genre = None):
+        """ find music with artist and(or) genre given.
+        """
         params = ''
         if (artist != None):
             params += '"artist" : ["%s"]' % artist
