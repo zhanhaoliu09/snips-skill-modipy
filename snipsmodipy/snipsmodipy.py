@@ -48,7 +48,7 @@ def skip_track(url):
     request(url, commandList['next']) 
     
 def previous_track(url):
-    request(url, commandList['next'])
+    request(url, commandList['previous'])
 
 def repeat(url):
     pass
