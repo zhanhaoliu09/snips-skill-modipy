@@ -14,9 +14,8 @@ commandList = {'play' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pl
             'next' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.next"}',
             'previous' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.previous"}', 
             'find' : '{"jsonrpc": "2.0", "id": 1, "method": "core.library.search", "params" : {%s} } ',
-            'describe' : '{"jsonrpc": "2.0", "id": 1, "method": "core.describe"}'
-    
-}
+            'describe' : '{"jsonrpc": "2.0", "id": 1, "method": "core.describe"}'   
+            }
 
 def request(url, data):
     """ send data to url.
