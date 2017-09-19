@@ -5,43 +5,54 @@ Spyder Editor
 This is a temporary script file.
 """
 import urllib2
+import pprint
+import json
+
+commandList = {'play' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.play"}',
+            'get_state' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_state"}',
+            'pause' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pause"}',
+            'stop' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.stop"}',
+            'next' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.next"}',
+            'previous' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.previous"}', 
+            'find' : '{"jsonrpc": "2.0", "id": 1, "method": "core.library.search", "params" : {%s} } ',
+            'describe' : '{"jsonrpc": "2.0", "id": 1, "method": "core.describe"}'
+    
+}
 
 def request(url, data):
     req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
     f = urllib2.urlopen(req)
+    print(type(f))
+    pp = pprint.PrettyPrinter(indent=4)
     for x in f:
-        print(x)
+        d = json.loads(x)
+        pp.pprint(d)
     f.close()
 
 def play(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.play"}'
-    request(url, data)
+    request(url, commandList['play'])
     
 def get_state(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_state"}'
-    request(url, data)    
+    request(url, commandList['get_state'])    
 
 def pause(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pause"}'
-    request(url, data)   
+    request(url, commandList['pause'])   
     
 def stop(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.stop"}'
-    request(url, data)
+    request(url, commandList['stop'])
     
 def skip_track(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.next"}'
-    request(url, data) 
+    request(url, commandList['next']) 
     
 def previous_track(url):
-    data = '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.previous"}'
-    request(url, data)
+    request(url, commandList['next'])
 
 def repeat(url):
     pass
 
-def search_playlist(url):
-    pass
+def search_playlist(url, params):
+    print(commandList['find'] % (params))
+    request(url, commandList['find'] % (params))
 
 class SnipsModipy(object):
     def __init__(self, url):
@@ -61,6 +72,15 @@ class SnipsModipy(object):
         
     def previous(self):
         previous_track(self.url)
+
+    def find(self, artist = None, genre = None):
+        params = ''
+        if (artist != None):
+            params += '"artist" : ["%s"]' % artist
+        if (genre != None):
+            params += '"genre" : ["%s"]' % genre
+        print(params)
+        search_playlist(self.url, params)
         
         
 

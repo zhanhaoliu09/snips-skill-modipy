@@ -1,5 +1,5 @@
-package_name: snipsfakeweather
-class_name: SnipsFakeWeather
+package_name: snipsmidipy
+class_name: SnipsModipy
 description: We got fake news. Now it is time for fake weather forecasts.
 intents:
   - intent: SearchWeatherForecastTemperature
