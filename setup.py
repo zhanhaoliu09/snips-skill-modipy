@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='snipsmodipy',
+    name='SnipsModipy',
     version='0.1',
     description='control modipy by Snips Platform',
     author='Zhanhao Liu',
@@ -14,6 +14,6 @@ setup(
     keywords=['snips'],
     include_package_data=False,
     packages=[
-        'snipsmodipy'
+        'SnipsModipy'
     ]
 )
