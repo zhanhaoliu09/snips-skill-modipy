@@ -14,6 +14,6 @@ setup(
     keywords=['snips'],
     include_package_data=False,
     packages=[
-        'SnipsModipy'
+        'snipsmodipy'
     ]
 )
