@@ -55,6 +55,7 @@ def search_playlist(url, params):
 
 class SnipsModipy(object):
     def __init__(self, url):
+        print('*********************')
         self.url = url
         
     def playMusic(self):
