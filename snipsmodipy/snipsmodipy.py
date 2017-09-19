@@ -7,7 +7,7 @@ This is a temporary script file.
 import urllib2
 import pprint
 import json
-
+from snipsskill-core import login
 commandList = {'play' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.play"}',
             'get_state' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.get_state"}',
             'pause' : '{"jsonrpc": "2.0", "id": 1, "method": "core.playback.pause"}',
@@ -59,12 +59,14 @@ class SnipsModipy(object):
         self.url = url
         
     def playMusic(self):
+        print('play')
         play(self.url)
         
     def pauseMusic(self):
         pause(self.url)
         
     def stopMusic(self):
+        print('stop')
         stop(self.url)
     
     def next(self):
