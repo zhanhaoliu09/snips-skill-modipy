@@ -12,7 +12,7 @@ setup(
     install_requires=[],
     setup_requires=['green'],
     keywords=['snips'],
-    include_package_data=False,
+    include_package_data=True,
     packages=[
         'snipsmodipy'
     ]
